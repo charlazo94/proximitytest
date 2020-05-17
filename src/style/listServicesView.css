@@ -1,11 +1,49 @@
-
 .row {
     display: flex;
-    flex-direction: row;
+    justify-content:space-between ;
+    width: 100%;
 }
-.disabled{
+
+.col-xs-4 {
+
+}
+
+.col-xs-8 {
+    width: 50%;
+
+}
+
+.disabled {
     display: flex;
     flex-direction: row;
-    pointer-events:none;
-    opacity:0.7;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.pull-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.active {
+    background: #eee;
+}
+.listServicesContainer {
+    display: flex;
+    justify-content: center;
+}
+.container {
+
+}
+.buttons {
+    position: fixed;
+    width: 15%;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 5%;
+    padding-bottom: 2%;
 }

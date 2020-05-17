@@ -35,7 +35,7 @@ class ServiceView extends React.Component {
             <span className="close" onClick={this.handleClick}>
             &times;
           </span>
-                <input type="text" value={this.state.id} onChange={this.valueChange.bind(this, 'id')}/>
+                <input type="text" disabled={true} value={this.state.id} onChange={this.valueChange.bind(this, 'id')}/>
                 <input type="text" value={this.state.date} onChange={this.valueChange.bind(this, 'date')}/>
                 <input type="text" value={this.state.name} onChange={this.valueChange.bind(this, 'name')}/>
                 <input type="text" value={this.state.document} onChange={this.valueChange.bind(this, 'document')}/>

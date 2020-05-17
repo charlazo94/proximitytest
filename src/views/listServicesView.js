@@ -1,6 +1,7 @@
 import React from 'react';
 import ServiceView from "./serviceView";
 import {DataTable, dataReducer} from 'react-data-components';
+import { CSVLink } from "react-csv";
 
 class ListServicesView extends React.Component {
 
@@ -9,7 +10,8 @@ class ListServicesView extends React.Component {
         this.state = {
             popUp: false,
             service: undefined,
-            services: undefined
+            services: undefined,
+            selected: undefined,
         }
     }
 
@@ -31,6 +33,30 @@ class ListServicesView extends React.Component {
 
     }
 
+    downloadCsv(data, text) {
+        const headers = [
+            { label: 'Date', key: 'date'  },
+            { label: 'Name', key: 'name' },
+            { label: 'Document', key: 'document' },
+            { label: 'Next', key: 'next' },
+            { label: 'Service', key: 'service' },
+            { label: 'State', key: 'state' }
+        ];
+        return <CSVLink data={data} headers={headers} filename={`services-${new Date().toString()}-file.csv`}>
+            {text}
+        </CSVLink>
+    }
+    selectRow(row) {
+        console.log(row.id)
+        this.setState({ selected: row , popUp:!this.state.popUp});
+    }
+    buildRowOptions(row) {
+        return {
+            onClick: this.selectRow.bind(this, row),
+            className: typeof this.state.selected !== "undefined" && this.state.selected.id === row.id ? 'active' : null
+        };
+    }
+
     renderList() {
         if(typeof this.state.services !== "undefined") {
             const columns = [
@@ -42,7 +68,8 @@ class ListServicesView extends React.Component {
                 { title: 'State', prop: 'state' }
             ];
 
-            return <div>
+
+            return <div className="listServicesContainer">
                 {/*<li className={!this.state.popUp ? 'row' : 'disabled'} key={item.id}
                     onClick={this.openClosePopUp.bind(this)}>
                     <div>{item.date}</div>
@@ -59,8 +86,13 @@ class ListServicesView extends React.Component {
                     initialData={this.state.services}
                     initialPageLength={5}
                     initialSortBy={{ prop: 'name', order: 'descending' }}
-                    pageLengthOptions={[ 5, 20, 50 ]}/>
-                {/*{this.state.popUp ? <ServiceView service={item} toggle={this.openClosePopUp}/> : null}*/}
+                    pageLengthOptions={[ 5, 20, 50 ]}
+                    buildRowOptions={this.buildRowOptions.bind(this)}/>
+              {this.state.popUp ? <ServiceView service={this.state.selected} toggle={this.openClosePopUp}/> : null}
+              <div className='buttons'>
+                <button>Add</button>
+                {this.downloadCsv(this.state.services,'Download All')}
+              </div>
             </div>
         } else return <div></div>
     }

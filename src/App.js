@@ -70,13 +70,7 @@ const services = [{
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-
                 <ListServicesView services={services}/>
-                <div>
-                    <button>Add</button>
-                </div>
-            </header>
 
         </div>
     );
