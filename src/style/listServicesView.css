@@ -1,0 +1,11 @@
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.disabled{
+    display: flex;
+    flex-direction: row;
+    pointer-events:none;
+    opacity:0.7;
+}
