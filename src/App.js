@@ -11,66 +11,13 @@ import './css/solid.css';
 import './css/svg-with-js.css';
 import './css/v4-shims.css';
 import ListServicesView from "./views/listServicesView";
+import csvRepository from "./data/csvRepository";
 
-const services = [{
-    id: 1,
-    date: "2020-05-12",
-    name: 'carlos',
-    document: "115800828",
-    next: "2020-05-13",
-    service: "taxi",
-    state: "pending"
-},
-    {
-        id: 2,
-        date: "2020-05-13",
-        name: 'carlos',
-        document: "115800828",
-        next: "2020-05-13",
-        service: "taxi",
-        state: "pending"
-    },
-    {
-        id: 3,
-        date: "2020-05-14",
-        name: 'juan',
-        document: "115800828",
-        next: "2020-05-13",
-        service: "taxi",
-        state: "pending"
-    },
-    {
-        id: 4,
-        date: "2020-05-15",
-        name: 'carlos',
-        document: "115800828",
-        next: "2020-05-13",
-        service: "camion",
-        state: "pending"
-    },
-    {
-        id: 5,
-        date: "2020-05-13",
-        name: 'pedro',
-        document: "115800829",
-        next: "2020-05-13",
-        service: "taxi",
-        state: "pending"
-    },
-    {
-        id: 6,
-        date: "2020-05-43",
-        name: 'carlos',
-        document: "115800828",
-        next: "2020-05-13",
-        service: "lancha",
-        state: "pending"
-    }];
+ function App() {
 
-function App() {
     return (
         <div className="App">
-                <ListServicesView services={services}/>
+                <ListServicesView />
 
         </div>
     );

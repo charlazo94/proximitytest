@@ -1,17 +1,20 @@
 import React from 'react';
+import uuid4 from 'uuid/v4';
+import Moment from 'moment';
 
 
-class ServiceView extends React.Component {
+
+class AddServiceView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.service.id,
-            date: this.props.service.date,
-            name: this.props.service.name,
-            document: this.props.service.document,
-            next: this.props.service.next,
-            service: this.props.service.service,
-            state: this.props.service.state,
+            id: uuid4(),
+            date: Moment(new Date()).format('YYYY-MM-DD'),
+            name: "",
+            document: "",
+            next: "",
+            service: "",
+            state: "",
 
         }
 
@@ -31,11 +34,8 @@ class ServiceView extends React.Component {
     }
     save = () => {
         const newService = this.state;
-        this.props.update(newService);
-    }
-    delete = () => {
-        const toDelete = this.state;
-        this.props.delete(toDelete);
+        console.log(newService)
+        this.props.add(newService);
     }
 
     render() {
@@ -45,7 +45,7 @@ class ServiceView extends React.Component {
             &times;
           </span>
                 <input type="text" disabled={true} value={this.state.id} onChange={this.valueChange.bind(this, 'id')}/>
-                <input type="text" value={this.state.date} onChange={this.valueChange.bind(this, 'date')}/>
+                <input type="text" disabled={true} value={this.state.date} onChange={this.valueChange.bind(this, 'date')}/>
                 <input type="text" value={this.state.name} onChange={this.valueChange.bind(this, 'name')}/>
                 <input type="text" value={this.state.document} onChange={this.valueChange.bind(this, 'document')}/>
                 <input type="text" value={this.state.next} onChange={this.valueChange.bind(this, 'next')}/>
@@ -53,11 +53,10 @@ class ServiceView extends React.Component {
                 <input type="text" value={this.state.state} onChange={this.valueChange.bind(this, 'state')}/>
                 <div>
                     <button onClick={this.save}>Save</button>
-                    <button onClick={this.delete}>Delete</button>
                 </div>
             </div>
         </div>);
     }
 };
 
-export default ServiceView;
+export default AddServiceView;
