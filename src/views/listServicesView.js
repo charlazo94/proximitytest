@@ -67,6 +67,7 @@ class ListServicesView extends React.Component {
 
     downloadCsv(data, text) {
         const headers = [
+            {label:"id",key:'id'},
             {label: 'Date', key: 'date'},
             {label: 'Name', key: 'name'},
             {label: 'Document', key: 'document'},

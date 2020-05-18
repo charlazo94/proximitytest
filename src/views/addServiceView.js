@@ -1,7 +1,8 @@
 import React from 'react';
 import uuid4 from 'uuid/v4';
 import Moment from 'moment';
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 class AddServiceView extends React.Component {
@@ -12,10 +13,9 @@ class AddServiceView extends React.Component {
             date: Moment(new Date()).format('YYYY-MM-DD'),
             name: "",
             document: "",
-            next: "",
+            next: undefined,
             service: "",
-            state: "",
-
+            state: "pending",
         }
 
     }
@@ -25,18 +25,21 @@ class AddServiceView extends React.Component {
     };
 
     valueChange = (field, value) => {
-        console.log(value.target.value)
         let state = {...this.state};
         state[field] = value.target.value;
-        console.log(state)
-
         this.setState(state);
     }
     save = () => {
         const newService = this.state;
-        console.log(newService)
+        newService["next"] = Moment(this.state.next).format('YYYY-MM-DD')
         this.props.add(newService);
     }
+
+    handleChange = (date) => {
+        this.setState({
+            next: date
+        });
+    };
 
     render() {
         return (<div className='modal'>
@@ -44,13 +47,38 @@ class AddServiceView extends React.Component {
             <span className="close" onClick={this.handleClick}>
             &times;
           </span>
+                <label>Id:
                 <input type="text" disabled={true} value={this.state.id} onChange={this.valueChange.bind(this, 'id')}/>
-                <input type="text" disabled={true} value={this.state.date} onChange={this.valueChange.bind(this, 'date')}/>
+                </label>
+                <label>Date
+                <input type="text" disabled={true} value={this.state.date}
+                       onChange={this.valueChange.bind(this, 'date')}/>
+                </label>
+                <label>Name:
                 <input type="text" value={this.state.name} onChange={this.valueChange.bind(this, 'name')}/>
+                </label>
+                <label>
+                    Document:
                 <input type="text" value={this.state.document} onChange={this.valueChange.bind(this, 'document')}/>
-                <input type="text" value={this.state.next} onChange={this.valueChange.bind(this, 'next')}/>
+                </label>
+                <label>
+                    Siguiente:
+                <DatePicker
+                    selected={this.state.next}
+                    onChange={this.handleChange.bind(this)}
+                />
+                </label>
+                <label>Servicio:
                 <input type="text" value={this.state.service} onChange={this.valueChange.bind(this, 'service')}/>
-                <input type="text" value={this.state.state} onChange={this.valueChange.bind(this, 'state')}/>
+                </label>
+                <label>
+                    Estado:
+                <select value={this.state.state} onChange={this.valueChange.bind(this, 'state')}>
+                    <option value="pending">Pendiente</option>
+                    <option value="todo">a-realizar</option>
+                    <option value="done">realizado</option>
+                </select>
+                </label>
                 <div>
                     <button onClick={this.save}>Save</button>
                 </div>
